@@ -1,0 +1,47 @@
+/* this file is mostly going to be style overrides, or custom styling on a broad level */
+
+body {
+  font-family: Helvetica, sans-serif;
+}
+
+li {
+  list-style: none;
+}
+
+.container {
+  display: flex
+}
+
+.flex-center {
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.flex-column-reverse {
+  flex-direction: column-reverse;
+}
+
+.flex-row {
+  flex-direction: row;
+}
+
+.flex-row-reverse {
+  flex-direction: row-reverse;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.img-rounded {
+  border-radius: 50%;
+}
+
+.img-responsive {
+  max-width: 100%;
+  height: auto;
+}

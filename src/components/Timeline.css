@@ -1,0 +1,102 @@
+.timeline-item {
+  display: flex;
+  align-items: flex-start;
+}
+
+.timeline-item > div {
+  flex: 1;
+  padding: 20px 40px;
+}
+.timeline-item > div:last-child {
+  text-align: left;
+  padding-bottom: 40px !important;
+}
+.timeline-item:nth-child(odd) > div:first-child {
+  text-align: right;
+  position: relative;
+}
+.timeline-item:nth-child(odd) > div:first-child::after {
+  right: -11px;
+}
+.timeline-item:nth-child(odd) > div:last-child {
+  text-align: left;
+  border-left: 2px solid #e0e0e0;
+}
+.timeline-item:nth-child(odd) .timeline-content > h2 {
+  text-align: left !important;
+}
+.timeline-item:nth-child(odd) .timeline-date > div {
+  margin-right: 0px;
+}
+.timeline-item:nth-child(even) > div:first-child {
+  order: 2;
+  text-align: left;
+  position: relative;
+}
+.timeline-item:nth-child(even) > div:first-child::after {
+  left: -1px;
+}
+.timeline-item:nth-child(even) > div:last-child {
+  order: 1;
+  text-align: right;
+  border-right: 2px solid #e0e0e0;
+}
+.timeline-item:nth-child(even) .timeline-date > div {
+  margin-left: 0px;
+}
+.timeline-item:nth-child(even) .timeline-content > h2 {
+  text-align: right !important;
+}
+.timeline-item > div:first-child::after {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #673ab7;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 0 4px rgba(103, 58, 183, 0.2);
+}
+.timeline-item .timeline-date > div {
+  background-color: #673ab7;
+  box-shadow: 0 0 0 4px rgba(103, 58, 183, 0.2);
+  border-radius: 50px;
+  color: #fff;
+  text-align: center;
+  max-width: max-content;
+  margin: auto;
+  padding: 10px 20px;
+}
+.timeline-item .timeline-content .fa-icon {
+  font-size: 80px;
+}
+.timeline-item .timeline-content > h2 {
+  margin: 0px;
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #673ab7;
+}
+.timeline-item:not(:last-child) .timeline-content > .fa-icon {
+  margin-bottom: 70px;
+}
+@media (max-width: 767px) {
+  .timeline-item {
+    flex-direction: column;
+    border-left: 2px solid #e0e0e0;
+  }
+  .timeline-item > div {
+    border-width: 0px !important;
+    text-align: left !important;
+    order: unset !important;
+  }
+  .timeline-item > div::after {
+    left: 0% !important;
+  }
+  .timeline-item:nth-child(odd) .timeline-content > h2 {
+    text-align: left !important;
+  }
+  .timeline-item:nth-child(even) .timeline-content > h2 {
+    text-align: left !important;
+  }
+}
