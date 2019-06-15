@@ -1,17 +1,16 @@
 import React, { Component } from 'react';
 import NavBar from './components/NavBar.js';
 import logo from './logo.svg';
-import './App.css';
-import './Styles.css';
+import './OnBoard.css';
 
-class App extends Component {
+class OnBoard extends Component {
   render() {
     return (
-      <div className="App">
-        <NavBar />
+      <div className="OnBoard">
+        <h1>On board</h1>
       </div>
     );
   }
 }
 
-export default App;
+export default OnBoard;
