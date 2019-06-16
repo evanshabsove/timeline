@@ -13,14 +13,30 @@ class Question extends Component {
   constructor(props){
     super(props)
     this.state = {
-      value: Questions[0]
+      firstQuestion: Questions[0],
+      secondQuestion: "",
+      thirdQuestion: "",
+      firstAnswer: "",
+      secondAnswer: "",
+      thirdAnswer: ""
     }
 
     this.handleChangeQuestion = this.handleChangeQuestion.bind(this);
+    this.handleChangeAnswer = this.handleChangeAnswer.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChangeQuestion() {
-    this.setState({ value: this.getQuestion()})
+    this.setState({ firstQuestion: this.getQuestion()})
+  }
+
+  handleChangeAnswer(event) {
+    this.setState({ firstAnswer: event.target.value});
+  }
+
+  handleSubmit(event) {
+    alert('the answer is: ' + this.state.firstAnswer);
+    event.preventDefault();
   }
 
   getQuestion(){
@@ -39,8 +55,12 @@ class Question extends Component {
   render() {
     return (
       <div>
-        <h1>{this.state.value}</h1>
-        <button type="button" onClick={this.handleChangeQuestion}>Change Question</button>
+        <form onSubmit={this.handleSubmit}>
+          <h1>{this.state.firstQuestion}</h1>
+          <button type="button" onClick={this.handleChangeQuestion}>Change Question</button>
+          <textarea value={this.state.firstAnswer} onChange={this.handleChangeAnswer} />
+          <input type="submit" value="Submit" />
+        </form>
       </div>
     );
   }
