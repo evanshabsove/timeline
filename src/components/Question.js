@@ -25,16 +25,15 @@ class Question extends Component {
   }
 
   handleChangeQuestion(number) {
-    console.log(number)
     switch (number) {
       case "first":
-        this.setState({ firstQuestion: this.getQuestion()})
+        this.setState({ firstQuestion: this.getQuestion("firstQuestion")})
         break;
       case "second":
-        this.setState({ secondQuestion: this.getQuestion()})
+        this.setState({ secondQuestion: this.getQuestion("secondQuestion")})
         break;
       case "third":
-        this.setState({ thirdQuestion: this.getQuestion()})
+        this.setState({ thirdQuestion: this.getQuestion("thirdQuestion")})
         break;
     }
   }
@@ -58,21 +57,38 @@ class Question extends Component {
     event.preventDefault();
   }
 
-  handleSubmitQuestion() {
-
+  handleSubmitQuestion(number) {
+    switch (number) {
+      case "first":
+        this.setState({ secondQuestion: this.getQuestion("secondQuestion")});
+        break;
+      case "second":
+        this.setState({ thirdQuestion: this.getQuestion("thirdQuestion")});
+        break;
+    }
   }
 
-  getQuestion(){
-    let currentQuestion = this.state.value
+  getQuestion(stateQuestion){
+    let currentQuestion = this.state[stateQuestion]
     let question = Questions[Math.floor(Math.random() * Questions.length)]
-    if (currentQuestion === question) {
-      while (currentQuestion === question) {
+    if (currentQuestion === question || this.checkIfAlreadyAsked(question)) {
+      while (currentQuestion === question || this.checkIfAlreadyAsked(question)) {
         question = Questions[Math.floor(Math.random() * Questions.length)]
       }
       return question
     } else {
       return question
     }
+  }
+
+  checkIfAlreadyAsked(currentQuestion){
+    let questions = [
+      this.state.firstQuestion,
+      this.state.secondQuestion,
+      this.state.thirdQuestion,
+    ]
+    console.log(questions.includes(currentQuestion))
+    return questions.includes(currentQuestion)
   }
 
   render() {
@@ -94,9 +110,8 @@ class Question extends Component {
           <h1>{this.state.thirdQuestion}</h1>
           <button type="button" onClick={(e) => this.handleChangeQuestion("third")}>Change Question</button>
           <textarea value={this.state.thirdAnswer} onChange={(e) => this.handleChangeAnswer("third", e)} />
-          <button type="button" onClick={(e) => this.handleSubmitQuestion("third")}>Submit Answer</button>
+          <input type="submit" value="Submit" />
         </div>
-        <input type="submit" value="Submit" />
       </form>
     );
   }
