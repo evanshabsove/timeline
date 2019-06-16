@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
-import NavBar from './components/NavBar.js';
-import logo from './logo.svg';
 import './OnBoard.css';
+import Question from './components/Question.js'
 
 class OnBoard extends Component {
   render() {
     return (
-      <div className="OnBoard">
-        <h1>On board</h1>
+      <div className="OnBoard container flex-center">
+        <Question />
       </div>
     );
   }

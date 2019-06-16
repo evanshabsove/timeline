@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Profile from './components/Profile.js';
-import logo from './logo.svg';
 
 class ProfilePage extends Component {
   render() {
