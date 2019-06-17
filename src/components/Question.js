@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import './Question.css';
+import {
+	withRouter
+} from 'react-router-dom';
 
 const Questions = [
   "First Question",
@@ -55,6 +58,7 @@ class Question extends Component {
   handleSubmit(event) {
     alert('the answer is: ' + this.state.firstAnswer);
     event.preventDefault();
+    this.props.history.push("/profile")
   }
 
   handleSubmitQuestion(number) {
@@ -120,4 +124,4 @@ class Question extends Component {
   }
 }
 
-export default Question;
+export default withRouter(Question);
