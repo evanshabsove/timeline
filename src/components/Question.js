@@ -98,19 +98,22 @@ class Question extends Component {
           <h1>{this.state.firstQuestion}</h1>
           <button type="button" onClick={(e) => this.handleChangeQuestion("first")}>Change Question</button>
           <textarea value={this.state.firstAnswer} onChange={(e) => this.handleChangeAnswer("first", e)} />
+          <input type="date" value={this.state.firstDate} />
           <button type="button" onClick={(e) => this.handleSubmitQuestion("first")}>Submit Answer</button>
         </div>
         <div className="second-question">
           <h1>{this.state.secondQuestion}</h1>
           <button type="button" onClick={(e) => this.handleChangeQuestion("second")}>Change Question</button>
           <textarea value={this.state.secondAnswer} onChange={(e) => this.handleChangeAnswer("second", e)} />
+          <input type="date" value={this.state.secondDate} />
           <button type="button" onClick={(e) => this.handleSubmitQuestion("second")}>Submit Answer</button>
         </div>
         <div className="third-question">
           <h1>{this.state.thirdQuestion}</h1>
           <button type="button" onClick={(e) => this.handleChangeQuestion("third")}>Change Question</button>
           <textarea value={this.state.thirdAnswer} onChange={(e) => this.handleChangeAnswer("third", e)} />
-          <input type="submit" value="Submit" />
+          <input type="date" value={this.state.thirdDate} />
+          <input type="submit" value="Submit" onClick={this.handleSubmit} />
         </div>
       </form>
     );
