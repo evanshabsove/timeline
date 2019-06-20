@@ -27,7 +27,7 @@ class OnBoard extends Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit} className="container flex-center flex-column">
-        <Question />
+        <Question question={Questions[0]}/>
       </form>
     );
   }

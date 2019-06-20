@@ -16,7 +16,6 @@ class Question extends Component {
   constructor(props){
     super(props)
     this.state = {
-      question: "First question",
       answer: ""
     }
 
@@ -53,7 +52,7 @@ class Question extends Component {
   render() {
     return (
       <div className="first-question">
-        <h1>{this.state.question}</h1>
+        <h1>{this.props.question}</h1>
         <button type="button" onClick={this.handleChangeQuestion}>Change Question</button>
         <textarea value={this.state.answer} onChange={this.handleChangeAnswer} />
         <input type="date" value={this.state.date} />
