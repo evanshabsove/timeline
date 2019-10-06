@@ -16,7 +16,7 @@ class Question extends Component {
   constructor(props){
     super(props)
     this.state = {
-      question: "First question",
+      question: this.props.question,
       answer: ""
     }
 
