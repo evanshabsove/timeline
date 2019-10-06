@@ -45,6 +45,7 @@ class OnBoard extends Component {
   }
 
   getNewQuestion(question){
+    console.log(question)
     if (question != null) {
       let newQuestion = this.giveNotUsedQuestion()
       let index = this.usedQuestions.indexOf(question);
@@ -59,7 +60,7 @@ class OnBoard extends Component {
     let questions = []
     // Outer loop to create parent
     for (let i = 0; i < 3; i++) {
-      questions.push(<Question question={this.giveNotUsedQuestion()} getNewQuestion={this.getNewQuestion(null)} />)
+      questions.push(<Question question={this.giveNotUsedQuestion()} getNewQuestion={(question) => this.getNewQuestion(question)} />)
     }
     return questions
   }

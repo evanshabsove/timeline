@@ -19,8 +19,9 @@ class Question extends Component {
   }
 
   handleChangeQuestion() {
-		console.log(this.props)
+		console.log(this.state.question)
 		let newQuestion = this.props.getNewQuestion(this.state.question)
+		console.log(newQuestion)
 		this.setState({ question: newQuestion})
   }
 
@@ -49,7 +50,7 @@ class Question extends Component {
     return (
       <div className="first-question">
         <h1>{this.state.question}</h1>
-        <button type="button" onClick={this.handleChangeQuestion}>Change Question</button>
+        <button type="button" onClick={() => this.handleChangeQuestion()}>Change Question</button>
         <textarea value={this.state.answer} onChange={this.handleChangeAnswer} />
         <input type="date" value={this.state.date} />
         <button type="button" onClick={this.handleSubmitQuestion}>Submit Answer</button>
