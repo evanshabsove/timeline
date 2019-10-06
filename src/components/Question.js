@@ -4,13 +4,6 @@ import {
 	withRouter
 } from 'react-router-dom';
 
-const Questions = [
-  "First Question",
-  "Second Question",
-  "Third Question",
-  "Fourth Question"
-]
-
 class Question extends Component {
 
   constructor(props){
@@ -26,7 +19,9 @@ class Question extends Component {
   }
 
   handleChangeQuestion() {
-		this.setState({ question: "get question"})
+		console.log(this.props)
+		let newQuestion = this.props.getNewQuestion(this.state.question)
+		this.setState({ question: newQuestion})
   }
 
   handleChangeAnswer() {
@@ -37,17 +32,17 @@ class Question extends Component {
 		alert('the answer is: ' + this.state.answer);
   }
 
-  getQuestion(stateQuestion){
-    let currentQuestion = this.state[stateQuestion]
-    let question = Questions[Math.floor(Math.random() * Questions.length)]
-    if (currentQuestion === question || this.checkIfAlreadyAsked(question)) {
-      while (currentQuestion === question || this.checkIfAlreadyAsked(question)) {
-        question = Questions[Math.floor(Math.random() * Questions.length)]
-      }
-      return question
-    } else {
-      return question
-    }
+  getNewQuestion(stateQuestion){
+    // let currentQuestion = this.state[stateQuestion]
+    // let question = Questions[Math.floor(Math.random() * Questions.length)]
+    // if (currentQuestion === question || this.checkIfAlreadyAsked(question)) {
+    //   while (currentQuestion === question || this.checkIfAlreadyAsked(question)) {
+    //     question = Questions[Math.floor(Math.random() * Questions.length)]
+    //   }
+    //   return question
+    // } else {
+    //   return question
+    // }
   }
 
   render() {

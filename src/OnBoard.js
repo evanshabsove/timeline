@@ -6,7 +6,10 @@ const Questions = [
   "First Question",
   "Second Question",
   "Third Question",
-  "Fourth Question"
+  "Fourth Question",
+  "Fifth Question",
+  "Sixth Question",
+  "Seventh Question"
 ]
 
 class OnBoard extends Component {
@@ -41,11 +44,22 @@ class OnBoard extends Component {
     // }
   }
 
+  getNewQuestion(question){
+    if (question != null) {
+      let newQuestion = this.giveNotUsedQuestion()
+      let index = this.usedQuestions.indexOf(question);
+      if (index > -1) {
+        this.usedQuestions.splice(index, 1);
+      }
+      return newQuestion
+    }
+  }
+
   createQuestions(){
     let questions = []
     // Outer loop to create parent
     for (let i = 0; i < 3; i++) {
-      questions.push(<Question question={this.giveNotUsedQuestion()} />)
+      questions.push(<Question question={this.giveNotUsedQuestion()} getNewQuestion={this.getNewQuestion(null)} />)
     }
     return questions
   }
