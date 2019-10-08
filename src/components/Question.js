@@ -16,6 +16,7 @@ class Question extends Component {
 
 		this.handleChangeQuestion = this.handleChangeQuestion.bind(this);
 		this.handleChangeAnswer = this.handleChangeAnswer.bind(this);
+		this.handleChangeDate = this.handleChangeDate.bind(this)
   }
 
   handleChangeQuestion() {
@@ -28,13 +29,17 @@ class Question extends Component {
 		this.props.updateAnswers(event.target.value, this.state.questionNumber)
   }
 
+	handleChangeDate() {
+		this.props.updateDate(event.target.value, this.state.questionNumber)
+	}
+
   render() {
     return (
       <div className="first-question">
         <h1>{this.state.question}</h1>
         <button type="button" onClick={() => this.handleChangeQuestion()}>Change Question</button>
         <textarea value={this.state.answer} onChange={this.handleChangeAnswer} />
-        <input type="date" value={this.state.date} />
+        <input type="date" value={this.state.date} onChange={() => this.handleChangeDate()}/>
       </div>
     );
   }

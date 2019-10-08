@@ -17,9 +17,10 @@ class OnBoard extends Component {
   constructor(props){
     super(props)
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.usedQuestions = []
+    this.usedQuestions = [];
     this.answers = {
-    }
+    };
+    this.dates = {};
   }
 
   handleSubmit(event) {
@@ -60,11 +61,15 @@ class OnBoard extends Component {
     this.answers[questionNumber] = answer
   }
 
+  updateDate(date, questionNumber) {
+    this.dates[questionNumber] = date
+  }
+
   createQuestions(){
     let questions = []
     // Outer loop to create parent
     for (let i = 0; i < 3; i++) {
-      questions.push(<Question question={this.giveNotUsedQuestion()} getNewQuestion={(question) => this.getNewQuestion(question)} updateAnswers={(answer, questionNumber) => this.updateAnswers(answer, questionNumber)} questionNumber={i} />)
+      questions.push(<Question question={this.giveNotUsedQuestion()} getNewQuestion={(question) => this.getNewQuestion(question)} updateAnswers={(answer, questionNumber) => this.updateAnswers(answer, questionNumber)} questionNumber={i} updateDate={(date, questionNumber) => this.updateDate(date, questionNumber)} />)
     }
     return questions
   }
