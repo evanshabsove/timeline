@@ -8,7 +8,7 @@ class Timeline extends Component {
     let items = []
     // Outer loop to create parent
     this.props.questions.forEach(function(question, index){
-      items.push(<TimelineItem question={question}/>)
+      items.push(<TimelineItem question={question} key={index}/>)
     })
     return items
   }
