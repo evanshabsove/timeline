@@ -4,6 +4,7 @@ import './ProfileBio.css';
 class ProfileBio extends Component {
 
   render() {
+    const {user:{given_name, family_name}} = this.props;
     const full_name = `${this.props.user.given_name} ${this.props.user.family_name}`;
     return (
       <div>
