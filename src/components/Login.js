@@ -16,8 +16,29 @@ class Login extends Component {
   }
 
   handleSubmit = event => {
+    var that = this
     event.preventDefault()
-    this.props.userLoginFetch(this.state)
+    fetch("http://localhost:3000/authenticate", {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+      body: JSON.stringify(that.state)
+    })
+      .then(resp => resp.json())
+      .then(data => {
+        console.log(data)
+        if (data.message) {
+          // Here you should have logic to handle invalid login credentials.
+          // This assumes your Rails API will return a JSON object with a key of
+          // 'message' if there is an error
+        } else {
+          localStorage.setItem("token", data.auth_token)
+          // dispatch(loginUser(data.user))
+        }
+      })
+    // this.props.userLoginFetch(this.state)
   }
 
   render() {
@@ -48,8 +69,9 @@ class Login extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => ({
-  userLoginFetch: userInfo => dispatch(userLoginFetch(userInfo))
-})
+// const mapDispatchToProps = dispatch => ({
+//   userLoginFetch: userInfo => dispatch(userLoginFetch(userInfo))
+// })
 
-export default connect(null, mapDispatchToProps)(Login);
+// export default connect(null, mapDispatchToProps)(Login);
+export default Login;
