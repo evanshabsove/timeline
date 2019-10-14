@@ -17,12 +17,41 @@ class OnBoard extends Component {
   constructor(props){
     super(props)
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.usedQuestions = [];
     this.questions = {};
   }
 
   handleSubmit(event) {
-    console.log(this.questions);
+    let obj = {
+      user: {
+        questions_attributes: Object.values(this.questions)
+      }
+    }
+    console.log(obj);
+    var that = this
+    event.preventDefault()
+    fetch(`http://localhost:3000/users/1`, {
+      method: "PATCH",
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        Authorization: localStorage.getItem('token')
+      },
+      body: JSON.stringify(obj)
+    })
+      .then(resp => resp.json())
+      .then(data => {
+        console.log(data)
+        if (data.error != null) {
+          alert("Email or Password is incorrect.")
+          // Here you should have logic to handle invalid login credentials.
+          // This assumes your Rails API will return a JSON object with a key of
+          // 'message' if there is an error
+        } else {
+          localStorage.setItem("token", data.auth_token)
+          this.setState({redirect: true})
+          // dispatch(loginUser(data.user))
+        }
+      })
   }
 
   checkIfAlreadyAsked(question){
@@ -37,9 +66,11 @@ class OnBoard extends Component {
       Object.defineProperty(this.questions, question,
         Object.getOwnPropertyDescriptor(this.questions, previousQuestion));
       delete this.questions[previousQuestion];
+      this.questions[question]["question"] = question
     // Catch first load
     } else if (previousQuestion == null) {
       this.questions[question] = {}
+      this.questions[question]["question"] = question
     }
     return question
   }
@@ -82,7 +113,7 @@ class OnBoard extends Component {
     return (
       <form onSubmit={this.handleSubmit} className="container flex-center flex-column">
         {this.createQuestions()}
-                <button type="button" onClick={() => this.handleSubmit()}>Submit Answers</button>
+                <button type="button" onClick={(event) => this.handleSubmit(event)}>Submit Answers</button>
       </form>
     );
   }

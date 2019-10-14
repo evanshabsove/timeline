@@ -38,6 +38,7 @@ class Login extends Component {
           // 'message' if there is an error
         } else {
           localStorage.setItem("token", data.auth_token)
+          localStorage.setItem("userId", data.user_id)
           this.setState({redirect: true})
           // dispatch(loginUser(data.user))
         }
