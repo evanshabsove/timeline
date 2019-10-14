@@ -2,11 +2,13 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {userLoginFetch} from '../modules/actions';
 import './Login.css';
+import { Redirect } from 'react-router-dom';
 
 class Login extends Component {
   state = {
     email: "",
-    password: ""
+    password: "",
+    redirect: false
   }
 
   handleChange = event => {
@@ -29,12 +31,14 @@ class Login extends Component {
       .then(resp => resp.json())
       .then(data => {
         console.log(data)
-        if (data.message) {
+        if (data.error != null) {
+          alert("Email or Password is incorrect.")
           // Here you should have logic to handle invalid login credentials.
           // This assumes your Rails API will return a JSON object with a key of
           // 'message' if there is an error
         } else {
           localStorage.setItem("token", data.auth_token)
+          this.setState({redirect: true})
           // dispatch(loginUser(data.user))
         }
       })
@@ -42,6 +46,11 @@ class Login extends Component {
   }
 
   render() {
+    const { redirect } = this.state;
+
+     if (redirect) {
+       return <Redirect to='/onboard'/>;
+     }
     return (
       <form onSubmit={this.handleSubmit}>
         <h1>Login</h1>
