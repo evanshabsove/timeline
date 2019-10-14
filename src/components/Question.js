@@ -26,11 +26,11 @@ class Question extends Component {
 
   handleChangeAnswer() {
     this.setState({ answer: event.target.value});
-		this.props.updateAnswers(event.target.value, this.state.questionNumber)
+		this.props.updateAnswers(event.target.value, this.state.question)
   }
 
 	handleChangeDate() {
-		this.props.updateDate(event.target.value, this.state.questionNumber)
+		this.props.updateDate(event.target.value, this.state.question)
 	}
 
   render() {
