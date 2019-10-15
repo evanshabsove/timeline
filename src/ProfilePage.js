@@ -5,7 +5,6 @@ class ProfilePage extends Component {
 
   constructor(props){
     super(props)
-    console.log(this.props)
     this.state = {
       userId: this.props.match.params.userId
     }

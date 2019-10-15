@@ -31,8 +31,6 @@ class OnBoard extends Component {
         questions_attributes: Object.values(this.questions)
       }
     }
-    console.log(obj);
-    var that = this
     event.preventDefault()
     fetch(`http://localhost:3000/users/${localStorage.getItem('userId')}`, {
       method: "PATCH",
@@ -75,7 +73,7 @@ class OnBoard extends Component {
       delete this.questions[previousQuestion];
       this.questions[question]["question"] = question
     // Catch first load
-    } else if (previousQuestion == null) {
+  } else if (previousQuestion === null) {
       this.questions[question] = {}
       this.questions[question]["question"] = question
     }
@@ -107,13 +105,31 @@ class OnBoard extends Component {
     this.questions[question]["date"] = date
   }
 
-  createQuestions(){
-    let questions = []
-    // Outer loop to create parent
-    for (let i = 0; i < 3; i++) {
-      questions.push(<Question question={this.giveNotUsedQuestion()} getNewQuestion={(question) => this.getNewQuestion(question)} updateAnswers={(answer, questionNumber) => this.updateAnswers(answer, questionNumber)} questionNumber={i} key={i} updateDate={(date, questionNumber) => this.updateDate(date, questionNumber)} />)
+  createQuestionObject(){
+    if (this.props.questions == null) {
+      for (let i = 0; i < 3; i++) {
+        let question = this.giveNotUsedQuestion()
+        // this could be the dumbest line of code I have ever written
+        this.questions[question]["question"] = question
+      }
+    } else {
+      console.log(this.props.questions)
     }
-    return questions
+  }
+
+  createQuestions(){
+    this.createQuestionObject()
+    let returnedArray = []
+    let questions = Object.values(this.questions)
+    console.log(this.questions)
+    // Outer loop to create parent
+    questions.forEach(function(question, index){
+      returnedArray.push(<Question question={question.question} getNewQuestion={(question) => this.getNewQuestion(question)} updateAnswers={(answer, questionNumber) => this.updateAnswers(answer, questionNumber)} questionNumber={index} key={index} updateDate={(date, questionNumber) => this.updateDate(date, questionNumber)} />)
+    })
+    // for (let i = 0; i < 3; i++) {
+    //   questions.push(<Question question={this.giveNotUsedQuestion()} getNewQuestion={(question) => this.getNewQuestion(question)} updateAnswers={(answer, questionNumber) => this.updateAnswers(answer, questionNumber)} questionNumber={i} key={i} updateDate={(date, questionNumber) => this.updateDate(date, questionNumber)} />)
+    // }
+    return returnedArray
   }
 
   render() {

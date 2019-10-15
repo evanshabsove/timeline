@@ -5,10 +5,9 @@ import OnBoard from './OnBoard'
 import ProfilePage from './ProfilePage'
 import Register from './Register'
 import Search from './Search'
+import EditProfile from './EditProfile'
 import './index.css';
-import {connect} from 'react-redux';
-import {getProfileFetch, logoutUser} from './modules/actions';
-import { Route, Link, BrowserRouter as Router } from 'react-router-dom'
+import { Route, BrowserRouter as Router } from 'react-router-dom'
 import { Provider } from 'react-redux'
 
 import configureStore from './modules/store'
@@ -21,6 +20,7 @@ const routing = (
       <div>
         <Route path="/" component={App} />
         <Route path="/users/:userId" component={ProfilePage} />
+        <Route path="/editUser/:userId" component={EditProfile} />
         <Route path="/onboard" component={OnBoard} />
         <Route path="/register" component={Register} />
         <Route path="/search" component={Search} />
@@ -28,15 +28,6 @@ const routing = (
     </Router>
   </Provider>
 )
-
-const mapStateToProps = state => ({
-  currentUser: state.reducer.currentUser
-})
-
-const mapDispatchToProps = dispatch => ({
-  getProfileFetch: () => dispatch(getProfileFetch()),
-  logoutUser: () => dispatch(logoutUser())
-})
 
 ReactDOM.render(
   routing,

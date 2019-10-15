@@ -39,7 +39,6 @@ class Search extends Component {
   }
 
   render() {
-    console.log('render called');
     return (
       <div className="Search">
         <h3>Search</h3>

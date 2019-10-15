@@ -17,7 +17,7 @@ class Profile extends Component {
   }
 
   componentDidMount() {
-    if (this.props.userId == localStorage.getItem("userId")) {
+    if (this.props.userId === localStorage.getItem("userId")) {
       this.setState({
         isOwner: true
       })
@@ -59,7 +59,7 @@ class Profile extends Component {
       return (
         <div className="container flex-center flex-column text-center">
           <ProfilePicture />
-          <ProfileBio user={user} isOwner={isOwner} />
+          <ProfileBio user={user} isOwner={isOwner} userId={this.props.userId} />
           <Timeline questions={questions} />
         </div>
       );
