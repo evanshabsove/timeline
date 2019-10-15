@@ -42,6 +42,7 @@ class Search extends Component {
     console.log('render called');
     return (
       <div className="Search">
+        <h3>Search</h3>
         <SearchBar updateQuery={(q) => this.updateQuery(q)} />
         {this.searchResults()}
       </div>
