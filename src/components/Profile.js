@@ -8,13 +8,24 @@ class Profile extends Component {
 
   constructor(props) {
     super(props);
+    var isOwner;
     this.state = {
       error: null,
-      isLoaded: false
+      isLoaded: false,
+      isOwner: false
     };
   }
 
   componentDidMount() {
+    if (this.props.userId == localStorage.getItem("userId")) {
+      this.setState({
+        isOwner: true
+      })
+    } else {
+      this.setState({
+        isOwner: false
+      })
+    }
     fetch(`http://localhost:3000/users/${this.props.userId}`)
       .then(res => res.json())
       .then(
@@ -39,7 +50,7 @@ class Profile extends Component {
   }
 
   render() {
-    const { error, isLoaded, user, questions } = this.state;
+    const { error, isLoaded, user, questions, isOwner } = this.state;
     if (error) {
       return <div>Error: {error.message}</div>;
     } else if (!isLoaded) {
@@ -48,7 +59,7 @@ class Profile extends Component {
       return (
         <div className="container flex-center flex-column text-center">
           <ProfilePicture />
-          <ProfileBio user={user} />
+          <ProfileBio user={user} isOwner={isOwner} />
           <Timeline questions={questions} />
         </div>
       );
