@@ -19,7 +19,7 @@ const routing = (
     <Router>
       <div>
         <Route path="/" component={App} />
-        <Route path="/profile" component={ProfilePage} />
+        <Route path="/users/:userId" component={ProfilePage} />
         <Route path="/onboard" component={OnBoard} />
         <Route path="/register" component={Register} />
       </div>

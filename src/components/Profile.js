@@ -15,7 +15,7 @@ class Profile extends Component {
   }
 
   componentDidMount() {
-    fetch("http://localhost:3000/users/1")
+    fetch(`http://localhost:3000/users/${this.props.userId}`)
       .then(res => res.json())
       .then(
         (result) => {

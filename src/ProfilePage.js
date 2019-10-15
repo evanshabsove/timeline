@@ -2,10 +2,19 @@ import React, { Component } from 'react';
 import Profile from './components/Profile.js';
 
 class ProfilePage extends Component {
+
+  constructor(props){
+    super(props)
+    console.log(this.props)
+    this.state = {
+      userId: this.props.match.params.userId
+    }
+  }
+
   render() {
     return (
       <div className="ProfilePage">
-        <Profile />
+        <Profile userId={this.state.userId} />
       </div>
     );
   }

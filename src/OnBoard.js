@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './OnBoard.css';
 import Question from './components/Question.js'
+import { Redirect } from 'react-router-dom';
 
 const Questions = [
   "First Question",
@@ -18,6 +19,10 @@ class OnBoard extends Component {
     super(props)
     this.handleSubmit = this.handleSubmit.bind(this);
     this.questions = {};
+
+    this.state = {
+      redirect: false
+    }
   }
 
   handleSubmit(event) {
@@ -29,7 +34,7 @@ class OnBoard extends Component {
     console.log(obj);
     var that = this
     event.preventDefault()
-    fetch(`http://localhost:3000/users/1`, {
+    fetch(`http://localhost:3000/users/${localStorage.getItem('userId')}`, {
       method: "PATCH",
       headers: {
         'Content-Type': 'application/json',
@@ -42,13 +47,15 @@ class OnBoard extends Component {
       .then(data => {
         console.log(data)
         if (data.error != null) {
-          alert("Email or Password is incorrect.")
+          // alert("Email or Password is incorrect.")
           // Here you should have logic to handle invalid login credentials.
           // This assumes your Rails API will return a JSON object with a key of
           // 'message' if there is an error
         } else {
-          localStorage.setItem("token", data.auth_token)
           this.setState({redirect: true})
+          // localStorage.setItem("token", data.auth_token)
+          // localStorage.setItem("user_id", data.user.id)
+          // this.setState({redirect: true})
           // dispatch(loginUser(data.user))
         }
       })
@@ -110,6 +117,11 @@ class OnBoard extends Component {
   }
 
   render() {
+    const { redirect } = this.state;
+
+     if (redirect) {
+       return <Redirect to={`/users/${localStorage.getItem("userId")}`} />;
+     }
     return (
       <form onSubmit={this.handleSubmit} className="container flex-center flex-column">
         {this.createQuestions()}
