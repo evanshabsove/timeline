@@ -4,6 +4,7 @@ import App from './App';
 import OnBoard from './OnBoard'
 import ProfilePage from './ProfilePage'
 import Register from './Register'
+import Search from './Search'
 import './index.css';
 import {connect} from 'react-redux';
 import {getProfileFetch, logoutUser} from './modules/actions';
@@ -22,6 +23,7 @@ const routing = (
         <Route path="/users/:userId" component={ProfilePage} />
         <Route path="/onboard" component={OnBoard} />
         <Route path="/register" component={Register} />
+        <Route path="/search" component={Search} />
       </div>
     </Router>
   </Provider>
