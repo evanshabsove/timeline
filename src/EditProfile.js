@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import OnBoard from './OnBoard.js'
+import EditProfileDetails from './components/EditProfile.js'
 
 class EditProfile extends Component {
 
@@ -35,7 +36,7 @@ class EditProfile extends Component {
   }
 
   render() {
-    const { questions, isLoaded, error } = this.state;
+    const { questions, isLoaded, error, user } = this.state;
     if (error) {
       return <div>Error: {error.message}</div>;
     } else if (!isLoaded) {
@@ -43,6 +44,7 @@ class EditProfile extends Component {
     } else {
       return (
         <div className="EditProfile">
+          <EditProfileDetails user={user} />
           <OnBoard questions={questions} />
         </div>
       );
