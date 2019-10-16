@@ -6,6 +6,7 @@ import ProfilePage from './ProfilePage'
 import Register from './Register'
 import Search from './Search'
 import EditProfile from './EditProfile'
+import Scan from './Scan'
 import './index.css';
 import { Route, BrowserRouter as Router } from 'react-router-dom'
 import { Provider } from 'react-redux'
@@ -24,6 +25,7 @@ const routing = (
         <Route path="/onboard" component={OnBoard} />
         <Route path="/register" component={Register} />
         <Route path="/search" component={Search} />
+        <Route path="/scan" component={Scan} />
       </div>
     </Router>
   </Provider>

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './OnBoard.css';
 import Question from './components/Question.js'
 import { Redirect } from 'react-router-dom';
 
