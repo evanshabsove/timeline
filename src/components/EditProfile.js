@@ -23,12 +23,14 @@ class EditProfile extends Component {
   handleChange(){
     this.setState({
       [event.target.name]: event.target.value
+    }, () => {
+      this.props.getNewProfileDetails(this.state)
     });
   }
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <div>
         <label>Email</label>
         <input
           name='email'
@@ -53,7 +55,7 @@ class EditProfile extends Component {
           value={this.state.family_name}
           onChange={() => this.handleChange()}
           /><br/>
-      </form>
+      </div>
     );
   }
 }
