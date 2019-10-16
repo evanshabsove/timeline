@@ -5,7 +5,6 @@ class EditProfile extends Component {
 
   constructor(props){
     super(props)
-    console.log(this.props)
     this.state = {
       userId: this.props.match.params.userId,
       isLoaded: false
@@ -17,7 +16,6 @@ class EditProfile extends Component {
       .then(res => res.json())
       .then(
         (result) => {
-          console.log(result)
           this.setState({
             isLoaded: true,
             user: result.data.attributes,
@@ -38,7 +36,6 @@ class EditProfile extends Component {
 
   render() {
     const { questions, isLoaded, error } = this.state;
-    console.log(this.state)
     if (error) {
       return <div>Error: {error.message}</div>;
     } else if (!isLoaded) {

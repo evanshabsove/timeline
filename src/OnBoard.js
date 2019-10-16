@@ -31,6 +31,7 @@ class OnBoard extends Component {
         questions_attributes: Object.values(this.questions)
       }
     }
+    console.log(obj)
     event.preventDefault()
     fetch(`http://localhost:3000/users/${localStorage.getItem('userId')}`, {
       method: "PATCH",
@@ -120,7 +121,8 @@ class OnBoard extends Component {
         that.questions[attributes.question] = {
           "question": attributes.question,
           "answer": attributes.answer,
-          "date": attributes.date
+          "date": attributes.date,
+          "id": question.id
         }
       })
     }
