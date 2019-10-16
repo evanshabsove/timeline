@@ -11,7 +11,7 @@ class ProfileBio extends Component {
   }
 
   render() {
-    const {user:{given_name, family_name}, isOwner, userId} = this.props;
+    const { isOwner, userId} = this.props;
     const full_name = `${this.props.user.given_name} ${this.props.user.family_name}`;
     return (
       <div>

@@ -9,9 +9,10 @@ class Question extends Component {
   constructor(props){
     super(props)
     this.state = {
-      question: this.props.question,
+      question: this.props.question.question,
 			questionNumber: this.props.questionNumber,
-      answer: ""
+      answer: this.props.question.answer,
+			date: this.props.question.date
     }
 
 		this.handleChangeQuestion = this.handleChangeQuestion.bind(this);

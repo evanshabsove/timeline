@@ -1,6 +1,4 @@
 import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import {userLoginFetch} from '../modules/actions';
 import './Login.css';
 import { Redirect } from 'react-router-dom';
 

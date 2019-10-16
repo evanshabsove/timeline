@@ -64,16 +64,17 @@ class OnBoard extends Component {
 
   giveNotUsedQuestion(previousQuestion = null){
     var that = this
-    let notAskedQuestions = Questions.filter(function(obj) { return Object.keys(that.questions).indexOf(obj) == -1; });
+    let notAskedQuestions = Questions.filter(function(obj) { return Object.keys(that.questions).indexOf(obj) === -1; });
     let question = notAskedQuestions[Math.floor(Math.random() * notAskedQuestions.length)]
 
+    console.log("what was I doing?")
     if (this.questions[previousQuestion] != null) {
       Object.defineProperty(this.questions, question,
         Object.getOwnPropertyDescriptor(this.questions, previousQuestion));
       delete this.questions[previousQuestion];
       this.questions[question]["question"] = question
     // Catch first load
-  } else if (previousQuestion === null) {
+    } else if (previousQuestion == null) {
       this.questions[question] = {}
       this.questions[question]["question"] = question
     }
@@ -106,6 +107,7 @@ class OnBoard extends Component {
   }
 
   createQuestionObject(){
+    var that = this;
     if (this.props.questions == null) {
       for (let i = 0; i < 3; i++) {
         let question = this.giveNotUsedQuestion()
@@ -113,7 +115,14 @@ class OnBoard extends Component {
         this.questions[question]["question"] = question
       }
     } else {
-      console.log(this.props.questions)
+      this.props.questions.forEach(function(question){
+        let attributes = question.attributes
+        that.questions[attributes.question] = {
+          "question": attributes.question,
+          "answer": attributes.answer,
+          "date": attributes.date
+        }
+      })
     }
   }
 
@@ -121,10 +130,10 @@ class OnBoard extends Component {
     this.createQuestionObject()
     let returnedArray = []
     let questions = Object.values(this.questions)
-    console.log(this.questions)
     // Outer loop to create parent
+    var that = this;
     questions.forEach(function(question, index){
-      returnedArray.push(<Question question={question.question} getNewQuestion={(question) => this.getNewQuestion(question)} updateAnswers={(answer, questionNumber) => this.updateAnswers(answer, questionNumber)} questionNumber={index} key={index} updateDate={(date, questionNumber) => this.updateDate(date, questionNumber)} />)
+      returnedArray.push(<Question question={question} getNewQuestion={(question) => that.getNewQuestion(question)} updateAnswers={(answer, questionNumber) => that.updateAnswers(answer, questionNumber)} questionNumber={index} key={index} updateDate={(date, questionNumber) => that.updateDate(date, questionNumber)} />)
     })
     // for (let i = 0; i < 3; i++) {
     //   questions.push(<Question question={this.giveNotUsedQuestion()} getNewQuestion={(question) => this.getNewQuestion(question)} updateAnswers={(answer, questionNumber) => this.updateAnswers(answer, questionNumber)} questionNumber={i} key={i} updateDate={(date, questionNumber) => this.updateDate(date, questionNumber)} />)

@@ -8,7 +8,6 @@ class Profile extends Component {
 
   constructor(props) {
     super(props);
-    var isOwner;
     this.state = {
       error: null,
       isLoaded: false,

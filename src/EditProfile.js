@@ -37,7 +37,8 @@ class EditProfile extends Component {
   }
 
   render() {
-    const { user, questions, isLoaded, error } = this.state;
+    const { questions, isLoaded, error } = this.state;
+    console.log(this.state)
     if (error) {
       return <div>Error: {error.message}</div>;
     } else if (!isLoaded) {

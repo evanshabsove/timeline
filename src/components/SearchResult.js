@@ -4,10 +4,6 @@ import { Link } from 'react-router-dom'
 
 class SearchResult extends Component {
 
-  constructor(props){
-    super(props)
-  }
-
   render() {
     const { user } = this.props
     const full_name = `${user.given_name} ${user.family_name}`;
