@@ -9,10 +9,20 @@ class Scan extends Component {
     super(props);
     this.state = {
     };
+
+    this.getNewUser = this.getNewUser.bind(this)
   }
 
   componentDidMount() {
-    fetch(`http://localhost:3000/users/1`)
+    this.getNewUser()
+  }
+
+  getNewUser(){
+    fetch(`http://localhost:3000/scan`, {
+      headers: {
+        Authorization: localStorage.getItem('token')
+      }
+    })
       .then(res => res.json())
       .then(
         (result) => {
@@ -43,6 +53,7 @@ class Scan extends Component {
     } else {
     return (
       <div className="Scan container flex-center flex-column text-center">
+        <button type="button" onClick={() => this.getNewUser()}>Next User</button>
         <ProfilePicture />
         <ProfileBio user={user} />
         <Timeline questions={questions} />
