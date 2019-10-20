@@ -4,11 +4,12 @@ import './Match.css';
 class Match extends Component {
 
   render() {
-    const { match } = this.props;
+    const { match, matchId } = this.props;
     const full_name = `${match.attributes.given_name} ${match.attributes.family_name}`
     return (
       <div>
         <h3>{match.attributes.given_name}</h3>
+        <button type="button" onClick={() => this.props.deleteMatch(matchId)}>Delete Match</button>
       </div>
     );
   }

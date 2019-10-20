@@ -41,6 +41,41 @@ class Matches extends Component {
       )
   }
 
+  deleteMatch(matchId){
+    var that = this
+    fetch(`http://localhost:3000/matches/${matchId}`, {
+      method: "DELETE",
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        Authorization: localStorage.getItem('token')
+      }
+    })
+      .then(res => res.json())
+      .then(
+        (result) => {
+          let matches = this.state.matches.map(function(match){
+            if (matchId != match.id) {
+              return match
+            }
+          }).filter(function (el) {
+            return el != null;
+          });
+          this.setState({
+            matches: matches
+          })
+          // should flash message here that you matched
+          // this.getNewUser()
+          // add code to remove this one from the states matches
+        },
+        // Note: it's important to handle errors here
+        // instead of a catch() block so that we don't swallow
+        // exceptions from actual bugs in components.
+        (error) => {
+        }
+      )
+  }
+
   createMatches(){
     let matches = this.state.matches
     // let currentUserId = localStorage.getItem("userId")
@@ -57,7 +92,7 @@ class Matches extends Component {
         return el != null;
       })[0];
       let user = that.getIncluded(otherUser)
-      returnedArray.push(<Match match={user} key={index} />)
+      returnedArray.push(<Match match={user} key={index} matchId={match.id} deleteMatch={(matchId) => that.deleteMatch(matchId)} />)
     })
 
     return returnedArray
