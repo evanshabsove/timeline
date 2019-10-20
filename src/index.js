@@ -6,6 +6,7 @@ import ProfilePage from './ProfilePage'
 import Register from './Register'
 import Search from './Search'
 import EditProfile from './EditProfile'
+import Matches from './Matches'
 import Scan from './Scan'
 import './index.css';
 import { Route, BrowserRouter as Router } from 'react-router-dom'
@@ -26,6 +27,7 @@ const routing = (
         <Route path="/register" component={Register} />
         <Route path="/search" component={Search} />
         <Route path="/scan" component={Scan} />
+        <Route path="/matches" component={Matches} />
       </div>
     </Router>
   </Provider>

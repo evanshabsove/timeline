@@ -20,6 +20,7 @@ class NavBar extends Component {
           <li><Link to={`/users/${localStorage.getItem("userId")}`}>Profile</Link></li>
           <li><Link to="/search">Search</Link></li>
           <li><Link to="/scan">Scan</Link></li>
+          <li><Link to="/matches">Matches</Link></li>
         </ul>
       </nav>
     );
