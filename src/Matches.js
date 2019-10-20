@@ -25,7 +25,8 @@ class Matches extends Component {
           console.log(result.included)
           this.setState({
             isLoaded: true,
-            matches: result.included
+            matches: result.data,
+            includes: result.included
           });
         },
         // Note: it's important to handle errors here
@@ -42,12 +43,34 @@ class Matches extends Component {
 
   createMatches(){
     let matches = this.state.matches
+    // let currentUserId = localStorage.getItem("userId")
+    let currentUserId = localStorage.getItem("userId")
     let returnedArray = []
+    var that = this
     matches.forEach(function(match, index){
-      returnedArray.push(<Match match={match} key={index} />)
+      let relationships = match.relationships
+      let otherUser = Object.values(relationships).map(function(relationship){
+        if (currentUserId != relationship.data.id){
+          return relationship.data
+        }
+      }).filter(function (el) {
+        return el != null;
+      })[0];
+      let user = that.getIncluded(otherUser)
+      returnedArray.push(<Match match={user} key={index} />)
     })
 
     return returnedArray
+  }
+
+  getIncluded(user){
+    let included;
+    this.state.includes.forEach(function(include){
+      if (include.id == user.id) {
+        included = include
+      }
+    })
+    return included
   }
 
   render() {
