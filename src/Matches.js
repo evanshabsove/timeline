@@ -1,16 +1,22 @@
 import React, { Component } from 'react';
 import Match from './components/Match.js'
+import { Redirect } from 'react-router-dom';
 
 class Matches extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
+      redirect: false
     };
   }
 
   componentDidMount() {
-    this.getMatches()
+    if (localStorage.getItem('hasQuestions') === "false") {
+      this.setState({redirect: true})
+    } else {
+      this.getMatches()
+    }
   }
 
   getMatches(){
@@ -109,9 +115,12 @@ class Matches extends Component {
   }
 
   render() {
-    const { error, isLoaded, matches } = this.state;
+    const { error, isLoaded, matches, redirect } = this.state;
     if (error) {
       return <div>Error: {error.message}</div>;
+    } else if (redirect) {
+      alert("You need to answer your three questions before viewing this page")
+      return <Redirect to='/onboard'/>;
     } else if (!isLoaded) {
       return <div>Loading...</div>;
     } else {

@@ -1,29 +1,57 @@
 import React, { Component } from 'react';
 import './NavBar.css';
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 
 class NavBar extends Component {
 
   constructor(props){
     super(props)
     this.state = {
-      users: [
-      ]
+      user: false
+    }
+
+    this.logout = this.logout.bind(this)
+  }
+
+  componentDidMount(){
+    if (localStorage.getItem("userId") == null) {
+      this.setState({user: false})
+    } else {
+      this.setState({user: true})
     }
   }
 
+
+
+  logout(){
+    localStorage.removeItem("userId")
+    localStorage.removeItem("token")
+  }
+
   render() {
-    return (
-      <nav>
-        <ul className="nav-container">
-          <li><Link to="/">Home</Link></li>
-          <li><Link to={`/users/${localStorage.getItem("userId")}`}>Profile</Link></li>
-          <li><Link to="/search">Search</Link></li>
-          <li><Link to="/scan">Scan</Link></li>
-          <li><Link to="/matches">Matches</Link></li>
-        </ul>
-      </nav>
-    );
+    const { user } = this.state
+    if (user) {
+      return (
+        <nav>
+          <ul className="nav-container">
+            <li><Link to={`/users/${localStorage.getItem("userId")}`}>Profile</Link></li>
+            <li><Link to="/search">Search</Link></li>
+            <li><Link to="/scan">Scan</Link></li>
+            <li><Link to="/matches">Matches</Link></li>
+            <li><a href="/register" onClick={() => this.logout()}>Logout</a></li>
+          </ul>
+        </nav>
+      );
+    } else {
+      return (
+        <nav>
+          <ul className="nav-container">
+            <li><Link to="/register">Home</Link></li>
+            <li><a href="/register" onClick={() => this.logout()}>Logout</a></li>
+          </ul>
+        </nav>
+      );
+    }
   }
 }
 

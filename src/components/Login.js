@@ -6,7 +6,9 @@ class Login extends Component {
   state = {
     email: "",
     password: "",
-    redirect: false
+    redirect: false,
+    hasQuestions: false,
+    userId: null
   }
 
   handleChange = event => {
@@ -37,17 +39,22 @@ class Login extends Component {
         } else {
           localStorage.setItem("token", data.auth_token)
           localStorage.setItem("userId", data.user.id)
-          this.setState({redirect: true})
+          localStorage.setItem("hasQuestions", data.has_questions)
+          this.setState({hasQuestions: data.has_questions, userId: data.user.id, redirect: true})
           // dispatch(loginUser(data.user))
+          // Note this is bad but w/e
+          window.location.reload();
         }
       })
     // this.props.userLoginFetch(this.state)
   }
 
   render() {
-    const { redirect } = this.state;
+    const { redirect, hasQuestions, userId } = this.state;
 
-     if (redirect) {
+     if (hasQuestions) {
+       return <Redirect to={`users/${userId}`}/>;
+     } else if (redirect) {
        return <Redirect to='/onboard'/>;
      }
     return (

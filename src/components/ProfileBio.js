@@ -5,8 +5,10 @@ import { Link } from 'react-router-dom'
 class ProfileBio extends Component {
 
   renderEditIfOwner(isOwner, userId){
-    if(isOwner === true){
+    if(isOwner === true && localStorage.getItem("hasQuestions") === "true"){
       return <Link to={`/editUser/${userId}`}>Edit</Link>
+    } else if (isOwner === true) {
+      return <Link to={`/onboard`}>Edit</Link>
     }
   }
 
@@ -16,7 +18,6 @@ class ProfileBio extends Component {
     return (
       <div>
         <h3>{full_name}</h3>
-        <p>I'm 24, super cool, and am the developer behind this site AMA!</p>
         {this.renderEditIfOwner(isOwner, userId)}
       </div>
     );

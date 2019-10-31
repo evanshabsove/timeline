@@ -2,19 +2,25 @@ import React, { Component } from 'react';
 import ProfilePicture from './components/ProfilePicture.js'
 import ProfileBio from './components/ProfileBio.js'
 import Timeline from './components/Timeline.js'
+import { Redirect } from 'react-router-dom';
 
 class Scan extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
+      redirect: false
     };
 
     this.getNewUser = this.getNewUser.bind(this)
   }
 
   componentDidMount() {
-    this.getNewUser()
+    if (localStorage.getItem('hasQuestions') === "false") {
+      this.setState({redirect: true})
+    } else {
+      this.getNewUser()
+    }
   }
 
   getNewUser(){
@@ -80,9 +86,12 @@ class Scan extends Component {
   }
 
   render() {
-    const { error, isLoaded, user, questions } = this.state;
+    const { error, isLoaded, user, questions, redirect } = this.state;
     if (error) {
       return <div>Error: {error.message}</div>;
+    } else if (redirect) {
+      alert("You need to answer your three questions before viewing this page")
+      return <Redirect to='/onboard'/>;
     } else if (!isLoaded) {
       return <div>Loading...</div>;
     } else {
