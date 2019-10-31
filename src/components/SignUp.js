@@ -39,6 +39,7 @@ class SignUp extends Component {
         } else {
           localStorage.setItem("token", data.auth_token)
           localStorage.setItem("userId", data.data.id)
+          localStorage.setItem("hasQuestions", "false")
           this.setState({redirect: true})
           // dispatch(loginUser(data.user))
         }
